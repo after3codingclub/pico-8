@@ -1,11 +1,11 @@
 -- Slot Machine for PICO-8
--- Creates a 3-channel slot machine where each column consists of head, body, and feet
+-- Creates a 3-channel slot machine where each row consists of head, body, and feet
 
 -- Constants
-local HEAD_Y = 20
-local BODY_Y = 40
-local FEET_Y = 60
-local SLOT_X = {30, 60, 90}
+local SCREEN_W = 128
+local SCREEN_H = 128
+local SLOT_X = SCREEN_W // 2 - 4 -- Center horizontally
+local SLOT_Y = {SCREEN_H // 2 - 12, SCREEN_H // 2 - 4, SCREEN_H // 2 + 4} -- Center vertically
 local SPRITE_START = 0 -- First sprite ID
 local SPRITE_COUNT = 4 -- Number of different head/body/feet variations
 
@@ -51,13 +51,11 @@ end
 
 function _draw()
     cls()
-    print("Press Z to Spin!", 40, 10, 7)
+    print("Press Z to Spin!", SCREEN_W // 2 - 30, 10, 7)
     
     for i=1,3 do
         local spr_id = slots[i].id
-        spr(SPRITE_START + spr_id, SLOT_X[i], HEAD_Y)
-        spr(SPRITE_START + SPRITE_COUNT + spr_id, SLOT_X[i], BODY_Y)
-        spr(SPRITE_START + SPRITE_COUNT * 2 + spr_id, SLOT_X[i], FEET_Y)
+        spr(SPRITE_START + (i-1) * SPRITE_COUNT + spr_id, SLOT_X, SLOT_Y[i])
     end
 end
 

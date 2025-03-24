@@ -5,7 +5,7 @@
 local SCREEN_W = 128
 local SCREEN_H = 128
 local SLOT_X = SCREEN_W // 2 - 4 -- Center horizontally
-local SLOT_Y = {SCREEN_H // 2 - 12, SCREEN_H // 2 - 4, SCREEN_H // 2 + 4} -- Center vertically
+local SLOT_Y = {SCREEN_H // 2 - 20, SCREEN_H // 2 - 4, SCREEN_H // 2 + 12} -- Adjusted for better centering
 local SPRITE_START = 0 -- First sprite ID
 local SPRITE_COUNT = 4 -- Number of different head/body/feet variations
 
@@ -51,11 +51,11 @@ end
 
 function _draw()
     cls()
-    print("Press Z to Spin!", SCREEN_W // 2 - 30, 10, 7)
+    print("Press Z to Spin!", SCREEN_W // 2 - 30, SCREEN_H // 4, 7)
     
     for i=1,3 do
         local spr_id = slots[i].id
-        spr(SPRITE_START + (i-1) * SPRITE_COUNT + spr_id, SLOT_X, SLOT_Y[i])
+        spr(SPRITE_START + spr_id, SLOT_X, SLOT_Y[i])
     end
 end
 
